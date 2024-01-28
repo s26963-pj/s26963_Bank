@@ -7,6 +7,8 @@ import com.example.s26963_bank.repository.ClientRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankServiceTest {

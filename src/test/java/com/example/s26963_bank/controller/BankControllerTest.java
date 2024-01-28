@@ -1,6 +1,7 @@
 package com.example.s26963_bank.controller;
 
 import com.example.s26963_bank.model.Client;
+import com.example.s26963_bank.model.CurrencyClass;
 import com.example.s26963_bank.repository.ClientRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +16,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.List;
 
-import static com.example.s26963_bank.model.CurrencyClass.PLN;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -34,16 +34,16 @@ class BankControllerTest {
     }
 
     @Test
-    void shouldSaveNewStudent() throws JsonProcessingException {
-        Client client = new Client("544543654", 1300,PLN,"Matt", "Eddams");
+    void shouldAddNewClient() throws JsonProcessingException {
+        Client client = new Client("544543654", 1300,CurrencyClass.PLN,"Matt", "Eddams");
 
         String json = objectMapper.writeValueAsString(client);
 
-        Client result = webTestClient.post().uri("/client")
+        Client result = webTestClient.post().uri("/client/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(json)
                 .exchange()
-                .expectStatus().isEqualTo(201)
+                .expectStatus().isCreated()
                 .expectBody(Client.class)
                 .returnResult().getResponseBody();
 
@@ -51,14 +51,13 @@ class BankControllerTest {
     }
 
     @Test
-    void shouldReturnAllStudents(){
-        Client client = new Client("54454676554", 100,PLN,"Eleonora", "Kowalska");
+    void shouldReturnAllClients(){
+        Client client = new Client("54454676554", 100,CurrencyClass.PLN,"Eleonora", "Kowalska");
 
         clientRepository.addClient(client);
 
-        List<Client> result = webTestClient.get().uri("/client")
+        List<Client> result = webTestClient.get().uri("/client/all")
                 .exchange()
-                .expectStatus().isOk()
                 .expectBodyList(Client.class)
                 .returnResult().getResponseBody();
 

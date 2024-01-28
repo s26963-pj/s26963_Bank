@@ -17,7 +17,7 @@ public class BankController {
 
     private BankService bankService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Client> addClient(@RequestBody Client client){
         try{
             Client result = bankService.add(client);
@@ -36,8 +36,14 @@ public class BankController {
             return ResponseEntity.badRequest().build();
         }
     }
-    @GetMapping
-    public ResponseEntity<List<Client>> getAllClientsWithBalance(@RequestParam double balance){
+    @GetMapping("/all")
+    public ResponseEntity<List<Client>> getClientList(){
+        List<Client> clientList = bankService.getAllClients();
+
+        return ResponseEntity.ok(clientList);
+    }
+    @GetMapping("all/{balance}")
+    public ResponseEntity<List<Client>> getAllClientsWithBalance(@PathVariable double balance){
         try{
             List<Client> result = bankService.getAllClientsWithBalance(balance);
             return ResponseEntity.ok(result);
