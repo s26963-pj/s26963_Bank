@@ -32,4 +32,9 @@ public class BankController {
         List<Client> clientList = bankService.getAllClients();
         return ResponseEntity.ok(clientList);
     }
+
+    public ResponseEntity<Client> findClientWithId(int id){
+        Client client = bankService.findClient(id);
+        return ResponseEntity.status(201).body(client);
+    }
 }
