@@ -28,7 +28,7 @@ public class BankController {
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Client> findClientWithId(@RequestParam int id){
+    public ResponseEntity<Client> findClientWithId(@PathVariable int id){
         try {
             Client client = bankService.findClient(id);
             return ResponseEntity.ok(client);
@@ -42,8 +42,8 @@ public class BankController {
 
         return ResponseEntity.ok(clientList);
     }
-    @GetMapping("all/{balance}")
-    public ResponseEntity<List<Client>> getAllClientsWithBalance(@PathVariable double balance){
+    @GetMapping
+    public ResponseEntity<List<Client>> getAllClientsWithBalance(@RequestParam(name = "balance") double balance){
         try{
             List<Client> result = bankService.getAllClientsWithBalance(balance);
             return ResponseEntity.ok(result);
