@@ -13,7 +13,7 @@ public class Client {
     private String name;
     private String lastName;
 
-    public Client(int clientId, String pesel, double balance, String currency, String name, String lastName) {
+    public Client(String pesel, double balance, String currency, String name, String lastName) {
         if (balance < 0){
             throw new ValidationException("balance cannot be below 0");
         }else if (pesel.isBlank() || name.isBlank() || lastName.isBlank()) {
