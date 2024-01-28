@@ -20,6 +20,6 @@ public class BankService {
     }
 
     public List<Client> getAllClients(){
-        return clientRepository.getAllclients();
+        return clientRepository.getAllClients();
     }
 }
