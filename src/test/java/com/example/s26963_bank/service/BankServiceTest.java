@@ -34,4 +34,9 @@ class BankServiceTest {
         assertThrows(ValidationException.class, () -> new Client("",0,CurrencyClass.EUR,"",""));
     }
 
+    @Test
+    void shouldThrowValidationBalanceException(){
+        assertThrows(ValidationException.class, () -> new Client("565453454", -4333, CurrencyClass.PLN, "Anna", "Monika"));
+    }
+
 }
