@@ -2,6 +2,7 @@ package com.example.s26963_bank.service;
 
 import com.example.s26963_bank.exceptions.ValidationException;
 import com.example.s26963_bank.model.Client;
+import com.example.s26963_bank.model.CurrencyClass;
 import com.example.s26963_bank.repository.ClientRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class BankServiceTest {
 
     @Test
     void shouldAddClientToRepo(){
-        Client client = new Client("10093664", 1500, "PLN", "Edward", "Kowalski");
+        Client client = new Client("10093664", 1500, CurrencyClass.PLN, "Edward", "Kowalski");
         Client result = assertDoesNotThrow(() -> bankService.add(client));
 
         assertEquals(result.getName(), client.getName());
@@ -28,7 +29,7 @@ class BankServiceTest {
 
     @Test
     void shouldThrowValidationException(){
-        assertThrows(ValidationException.class, () -> new Client("",0,"EUR","",""));
+        assertThrows(ValidationException.class, () -> new Client("",0,CurrencyClass.EUR,"",""));
     }
 
 }

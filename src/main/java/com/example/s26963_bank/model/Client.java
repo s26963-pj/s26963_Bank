@@ -9,11 +9,11 @@ public class Client {
     private int clientId;
     private String pesel;
     private double balance;
-    private String currency;
+    private CurrencyClass currency;
     private String name;
     private String lastName;
 
-    public Client(String pesel, double balance, String currency, String name, String lastName) {
+    public Client(String pesel, double balance, CurrencyClass currency, String name, String lastName) {
         if (balance < 0){
             throw new ValidationException("balance cannot be below 0");
         }else if (pesel.isBlank() || name.isBlank() || lastName.isBlank()) {
