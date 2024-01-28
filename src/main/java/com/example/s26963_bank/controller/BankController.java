@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,15 +27,29 @@ public class BankController {
             return ResponseEntity.badRequest().build();
         }
     }
-
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients(){
         List<Client> clientList = bankService.getAllClients();
         return ResponseEntity.ok(clientList);
     }
-
-    public ResponseEntity<Client> findClientWithId(int id){
-        Client client = bankService.findClient(id);
-        return ResponseEntity.status(201).body(client);
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> findClientWithId(@RequestParam int id){
+        try {
+            Client client = bankService.findClient(id);
+            return ResponseEntity.ok(client);
+        }catch (ValidationException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
+    @GetMapping("{id}/{balance}")
+    public ResponseEntity<List<Client>> getAllClientsWithBalance(@RequestParam double balance){
+        try{
+            List<Client> result = bankService.getAllClientsWithBalance(balance);
+            return ResponseEntity.ok(result);
+        }catch (ValidationException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+
 }
