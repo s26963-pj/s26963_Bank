@@ -1,7 +1,9 @@
 package com.example.s26963_bank.model;
 
 import com.example.s26963_bank.exceptions.ValidationException;
+import lombok.Getter;
 
+@Getter
 public class Client {
     private static int id;
     private int clientId;
