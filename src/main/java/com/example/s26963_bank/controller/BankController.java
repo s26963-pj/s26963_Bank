@@ -27,11 +27,6 @@ public class BankController {
             return ResponseEntity.badRequest().build();
         }
     }
-    @GetMapping
-    public ResponseEntity<List<Client>> getAllClients(){
-        List<Client> clientList = bankService.getAllClients();
-        return ResponseEntity.ok(clientList);
-    }
     @GetMapping("/{id}")
     public ResponseEntity<Client> findClientWithId(@RequestParam int id){
         try {
@@ -41,7 +36,7 @@ public class BankController {
             return ResponseEntity.badRequest().build();
         }
     }
-    @GetMapping("{id}/{balance}")
+    @GetMapping
     public ResponseEntity<List<Client>> getAllClientsWithBalance(@RequestParam double balance){
         try{
             List<Client> result = bankService.getAllClientsWithBalance(balance);
